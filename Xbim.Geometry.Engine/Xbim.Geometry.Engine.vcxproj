@@ -204,6 +204,11 @@
     <ClInclude Include="XbimNativeApi.h" />
     <ClInclude Include="XbimProgressMonitor.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Xbim.Geometry.Extension\Xbim.Geometry.Extension.csproj">
+      <Project>{17df7b0d-c131-4796-ba92-4731e1a92e7a}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

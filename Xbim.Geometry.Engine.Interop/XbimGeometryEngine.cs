@@ -35,7 +35,7 @@ namespace Xbim.Geometry.Engine.Interop
 
 
             _logger = logger ?? XbimLogging.CreateLogger<XbimGeometryEngine>();
-
+ 
             var conventions = new XbimArchitectureConventions();    // understands the process we run under
             string assemblyName = $"{conventions.ModuleName}.dll";// + conventions.Suffix; dropping the use of a suffix
             _logger.LogDebug("Loading {assemblyName}", assemblyName);

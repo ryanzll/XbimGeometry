@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net45;net46;net47;netstandard2.0;netstandard2.1;netcoreapp3.1</TargetFrameworks>
+    <AssemblyName>Xbim.Geometry.Extension</AssemblyName>
+    <RootNamespace>Xbim.Common.Geometry</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xbim.Common" Version="5.1.323" />
+  </ItemGroup>
+
+</Project>

@@ -85,5 +85,10 @@
 	<ItemGroup>
 		<None Include="..\xbim-toolkit-icon.png" Pack="True" PackagePath="\" />
 	</ItemGroup>
+  
+  
+	<ItemGroup>
+	  <ProjectReference Include="..\Xbim.Geometry.Extension\Xbim.Geometry.Extension.csproj" />
+	</ItemGroup>
  
 </Project>
