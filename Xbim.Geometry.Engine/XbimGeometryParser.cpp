@@ -101,6 +101,12 @@ namespace Xbim
 			return circleData;
 		}
 
+		XbimCurveData^ XbimGeometryParser::ParseLine(Handle_Geom_Line line)
+		{
+			XbimLineData^ lineData = gcnew XbimLineData();
+			return lineData;
+		}
+
 		XbimCurveData^ XbimGeometryParser::Parse(IXbimEdge^ xbimEdge)
 		{
 			XbimEdge^ xbimEdgeImpl = dynamic_cast<XbimEdge^>(xbimEdge);
@@ -110,10 +116,13 @@ namespace Xbim
 			Standard_Real ff, ll;
 			const Handle(Geom_Curve) curve = BRep_Tool::Curve(topoDS_Edge, loc, ff, ll);
 			XbimCurveData^ curveData = nullptr;
+			if (curve->DynamicType() == STANDARD_TYPE(Geom_Line))
+			{
+				curveData = ParseLine(opencascade::handle<Geom_Line>::DownCast(curve));
+			}
 			if (curve->DynamicType() == STANDARD_TYPE(Geom_Circle))
 			{
 				curveData = ParseCircle(opencascade::handle<Geom_Circle>::DownCast(curve));
-				//XbimCircle^ xbimCircle = gcnew XbimCircle(circle);
 			}
 
 			if (nullptr != curveData)
