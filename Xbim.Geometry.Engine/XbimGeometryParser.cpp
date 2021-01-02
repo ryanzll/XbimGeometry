@@ -12,6 +12,7 @@
 #include <Geom_Circle.hxx>
 #include <Geom_Line.hxx>
 #include <Geom_Ellipse.hxx>
+#include <Geom_TrimmedCurve.hxx>
 
 //using namespace opencascade;
 
@@ -65,16 +66,6 @@ namespace Xbim
 
 		XbimCurveData^ XbimGeometryParser::Parse(IXbimCurve^ xbimCurve)
 		{
-			XbimCurve^ xbimCurveImpl = dynamic_cast<XbimCurve^>(xbimCurve);
-			Handle(Geom_Curve) curve;
-			curve = opencascade::handle<Geom_Curve>(xbimCurveImpl);
-			if (curve->DynamicType() == STANDARD_TYPE(Geom_Line))
-			{
-			}
-			if (curve->DynamicType() == STANDARD_TYPE(Geom_Circle))
-			{
-				return ParseCircle(opencascade::handle<Geom_Circle>::DownCast(curve));
-			}
 			return nullptr;
 		}
 
@@ -107,14 +98,8 @@ namespace Xbim
 			return lineData;
 		}
 
-		XbimCurveData^ XbimGeometryParser::Parse(IXbimEdge^ xbimEdge)
+		XbimCurveData^ XbimGeometryParser::ParseCurve(Handle_Geom_Curve curve)
 		{
-			XbimEdge^ xbimEdgeImpl = dynamic_cast<XbimEdge^>(xbimEdge);
-			//TopoDS_Edge topoDS_Edge = TopoDS_Edge(xbimEdgeImpl);
-			const TopoDS_Edge topoDS_Edge = (const TopoDS_Edge &) (xbimEdgeImpl);
-			TopLoc_Location loc;
-			Standard_Real ff, ll;
-			const Handle(Geom_Curve) curve = BRep_Tool::Curve(topoDS_Edge, loc, ff, ll);
 			XbimCurveData^ curveData = nullptr;
 			if (curve->DynamicType() == STANDARD_TYPE(Geom_Line))
 			{
@@ -123,6 +108,28 @@ namespace Xbim
 			if (curve->DynamicType() == STANDARD_TYPE(Geom_Circle))
 			{
 				curveData = ParseCircle(opencascade::handle<Geom_Circle>::DownCast(curve));
+			}
+			return curveData;
+		}
+
+		XbimCurveData^ XbimGeometryParser::Parse(IXbimEdge^ xbimEdge)
+		{
+			XbimEdge^ xbimEdgeImpl = dynamic_cast<XbimEdge^>(xbimEdge);
+			//TopoDS_Edge topoDS_Edge = TopoDS_Edge(xbimEdgeImpl);
+			const TopoDS_Edge topoDS_Edge = (const TopoDS_Edge &) (xbimEdgeImpl);
+			TopLoc_Location loc;
+			Standard_Real ff, ll;
+			const Handle_Geom_Curve& curve = BRep_Tool::Curve(topoDS_Edge, loc, ff, ll);
+			XbimCurveData^ curveData = nullptr;
+			if(curve->DynamicType() == STANDARD_TYPE(Geom_TrimmedCurve))
+			{
+				const Handle(Geom_TrimmedCurve) trimmedCurve = opencascade::handle<Geom_TrimmedCurve>::DownCast(curve);
+				const Handle_Geom_Curve& baseCurve = trimmedCurve->BasisCurve();
+				curveData = ParseCurve(baseCurve);
+			}
+			else
+			{
+				curveData = ParseCurve(curve);
 			}
 
 			if (nullptr != curveData)

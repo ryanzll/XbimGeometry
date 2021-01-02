@@ -17,6 +17,7 @@ namespace Xbim
 			virtual XbimCurveData^ Parse(IXbimCurve^ xbimCurve);
 			XbimCurveData^ ParseLine(Handle_Geom_Line line);
 			XbimCurveData^ ParseCircle(Handle_Geom_Circle circle);
+			XbimCurveData^ ParseCurve(Handle_Geom_Curve curve);
 			virtual XbimCurveData^ Parse(IXbimEdge^ xbimEdge);
 			void Parse(IXbimSolid^ xbimSolid);
 		};
