@@ -602,9 +602,9 @@ namespace Xbim
 			//write out vertices 
 			for each (XbimPoint3D p in points)
 			{
-				binaryWriter->Write((float)p.X);
-				binaryWriter->Write((float)p.Y);
-				binaryWriter->Write((float)p.Z);
+				binaryWriter->Write(p.X);
+				binaryWriter->Write(p.Y);
+				binaryWriter->Write(p.Z);
 			}
 
 			//now write out the faces
