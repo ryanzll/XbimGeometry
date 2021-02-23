@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>ARchGL.SPDCost.Xbim.Geometry.Engine.Interop</id>
+    <version>5.1.404-ci.2</version>
+    <title>Xbim Geometry Engine</title>
+    <authors>Steve Lockley,Martin Cerny and XBIMTeam Contributors</authors>
+    <owners>Steve Lockley,Martin Cerny and XBIMTeam Contributors</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">CDDL-1.0</license>
+    <licenseUrl>https://licenses.nuget.org/CDDL-1.0</licenseUrl>
+    <icon>xbim-toolkit-icon.png</icon>
+    <projectUrl>https://github.com/xBimTeam/XbimGeometry</projectUrl>
+    <description>Provides support for the Ifc4 and Ifc2x3 Geometry conversion.</description>
+    <releaseNotes>Version 5.1 update. See https://github.com/xBimTeam/XbimGeometry/blob/master/CHANGELOG.md</releaseNotes>
+    <copyright>Copyright © XBIM Ltd</copyright>
+    <tags>BIM, IFC, Geometry, Meshing, Tesselation</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.7.2">
+        <dependency id="Microsoft.Extensions.Logging" version="2.1.1" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Logging.Abstractions" version="2.1.1" exclude="Build,Analyzers" />
+        <dependency id="System.Threading.Tasks" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="Xbim.Ifc" version="5.1.323" exclude="Build,Analyzers" />
+        <dependency id="Xbim.Tessellator" version="5.1.314" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <contentFiles>
+      <files include="any/net472/../ARchGL.SPDCost.Xbim.Geometry.Engine.Interop.targets" buildAction="Content" />
+    </contentFiles>
+  </metadata>
+</package>
